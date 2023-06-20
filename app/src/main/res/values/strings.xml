@@ -838,4 +838,6 @@
     <string name="share_playlist_with_list">Share URL list</string>
     <string name="video_details_list_item">- %1$s: %2$s</string>
     <string name="share_playlist_content_details">%1$s\n%2$s</string>
+    <string name="show_more">Show more</string>
+    <string name="show_less">Show less</string>
 </resources>
