@@ -4,8 +4,8 @@ name: act-release
 on:
   workflow_dispatch:
     inputs:
-      create-archive-all:
-        description: Create archive with ~ all files
+      ChangeNewPipeExtractor:
+        description: ChangeNewPipeExtractor
         type: boolean
         default: false
       compileSdkVersion:
@@ -14,6 +14,10 @@ on:
         default: false
       skip_sign:
         description: skip sign
+        type: boolean
+        default: false
+      create-archive-all:
+        description: Create archive with ~ all files
         type: boolean
         default: false
 
@@ -73,20 +77,20 @@ jobs:
           echo "BLD: ${{ env.TAG_BUILD }}"
           echo "${{ env.PRG_NAME }}-src-${{ env.PRG_VERSION }}-${{ env.TAG_BUILD }}" > _tag_name_.txt
 
-      - name: compileSdkVersion
-        if: ${{ inputs.compileSdkVersion }}
+      - name: change NewPipeExtractor version
+        if: ${{ inputs.ChangeNewPipeExtractor }}
         shell: bash
         run: |
           #set -x;
-          echo "compileSdk ... ";
-          grep -i "compileSdk" "app/build.gradle" || true;
+          # NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b
+          echo "NewPipeExtractor ... ";
+          echo grep 1
+          grep_1=$(grep "NewPipeExtractor:" app/build.gradle
+          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle
+          grep_2=$(grep "NewPipeExtractor:" app/build.gradle
+          echo "grep1:[$grep_1]"
+          echo "grep2:[$grep_2]"
           echo "... done";
-          sed -ibak 's|compileSdk |compileSdkVersion |' "app/build.gradle";
-          sed -ibk2 's|            dimension "all"|            dimension "all"\n            compileSdkVersion 34|' "app/build.gradle";
-          echo "compileSdk ... ";
-          grep -i "compileSdk" "app/build.gradle" || true;
-          echo "... done";
-          ls -la app/
 
 # signingConfig signingConfigs.release
       - name: skip sign
