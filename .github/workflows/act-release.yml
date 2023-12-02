@@ -279,5 +279,5 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-unsigned.apk
+            ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
             _tag_name_.txt
