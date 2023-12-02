@@ -226,14 +226,15 @@ jobs:
           cp ./app/build/outputs/apk/release/* ./signed-apk/
           echo "LIST: " ./signed-apk/
           ls -l ./signed-apk/
-          mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
+          mv ./signed-apk/app-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
+          # mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           ls -l ./signed-apk/
 
       - uses: deep-soft/sign-android-release@master
         name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
-        id: sign-FairEmail
+        id: sign-App
         with:
           releaseDirectory: ./signed-apk
           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
@@ -249,7 +250,7 @@ jobs:
         uses: deep-soft/upload-artifact@v3
         with:
           name: ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
-          path: ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+          path: ${{steps.sign-App.outputs.signedReleaseFile}}
 
       - name: Publish signed apk package
         if: env.ANDROID_SIGNING_KEY != null
@@ -258,7 +259,7 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+            ${{steps.sign-App.outputs.signedReleaseFile}}
             _tag_name_.txt
 
       - name: Publish version build - signed apk package
@@ -268,7 +269,7 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}-${{ env.TAG_VERSION }}${{ env.TAG_BUILD }}
           files: |
-            ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+            ${{steps.sign-App.outputs.signedReleaseFile}}
             _tag_name_.txt
 
       - name: Publish unsigned apk package
