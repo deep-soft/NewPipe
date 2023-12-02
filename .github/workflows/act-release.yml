@@ -84,12 +84,12 @@ jobs:
           #set -x;
           # NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b
           echo "NewPipeExtractor ... ";
-          echo grep 1
-          grep_1=$(grep "NewPipeExtractor:" app/build.gradle
-          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle
-          grep_2=$(grep "NewPipeExtractor:" app/build.gradle
-          echo "grep1:[$grep_1]"
-          echo "grep2:[$grep_2]"
+          echo grep 1;
+          grep_1=$(grep "NewPipeExtractor:" app/build.gradle);
+          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
+          grep_2=$(grep "NewPipeExtractor:" app/build.gradle);
+          echo "grep1:[$grep_1]";
+          echo "grep2:[$grep_2]";
           echo "... done";
 
 # signingConfig signingConfigs.release
