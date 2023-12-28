@@ -1,11 +1,11 @@
-# 2023-12-02 12:00
+# 2023-12-02 12:40
 name: act-release
 
 on:
   workflow_dispatch:
     inputs:
-      create-archive-all:
-        description: Create archive with ~ all files
+      ChangeNewPipeExtractor:
+        description: ChangeNewPipeExtractor
         type: boolean
         default: false
       compileSdkVersion:
@@ -14,6 +14,10 @@ on:
         default: false
       skip_sign:
         description: skip sign
+        type: boolean
+        default: false
+      create-archive-all:
+        description: Create archive with ~ all files
         type: boolean
         default: false
 
@@ -49,14 +53,14 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          # set -x
+          set -x
           _ref_all_=$(git log -1 --format='%H')
           # _ref_=$(echo ${_ref_all_::7})
           _ref_org_=${{ env.TAG_REF }}
           _ref_len_="${#_ref_org_}"
           _ref_=$(echo ${_ref_all_::$_ref_len_})
           _prg_version_base_="v"$(grep "versionName " "app/build.gradle" | cut -d '"' -f2)
-          _prg_version_=$_prg_version_base_$(grep "def getVersionCode" "app/build.gradle" | cut -d ' '  -f7)
+          _prg_version_=$_prg_version_base_$(grep "versionCode" "app/build.gradle" | cut -d ' '  -f2)
           echo "TAG_REF=$_ref_" >> $GITHUB_ENV
           _build_=${{ env.TAG_BUILD }}.$_ref_
           echo "TAG_BUILD=$_build_" >> $GITHUB_ENV
@@ -73,20 +77,20 @@ jobs:
           echo "BLD: ${{ env.TAG_BUILD }}"
           echo "${{ env.PRG_NAME }}-src-${{ env.PRG_VERSION }}-${{ env.TAG_BUILD }}" > _tag_name_.txt
 
-      - name: compileSdkVersion
-        if: ${{ inputs.compileSdkVersion }}
+      - name: change NewPipeExtractor version
+        if: ${{ inputs.ChangeNewPipeExtractor }}
         shell: bash
         run: |
           #set -x;
-          echo "compileSdk ... ";
-          grep -i "compileSdk" "app/build.gradle" || true;
+          # NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b
+          echo "NewPipeExtractor ... ";
+          echo grep 1;
+          grep_1=$(grep "NewPipeExtractor:" app/build.gradle);
+          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
+          grep_2=$(grep "NewPipeExtractor:" app/build.gradle);
+          echo "grep1:[$grep_1]";
+          echo "grep2:[$grep_2]";
           echo "... done";
-          sed -ibak 's|compileSdk |compileSdkVersion |' "app/build.gradle";
-          sed -ibk2 's|            dimension "all"|            dimension "all"\n            compileSdkVersion 34|' "app/build.gradle";
-          echo "compileSdk ... ";
-          grep -i "compileSdk" "app/build.gradle" || true;
-          echo "... done";
-          ls -la app/
 
 # signingConfig signingConfigs.release
       - name: skip sign
@@ -156,7 +160,7 @@ jobs:
         uses: deep-soft/action-gh-release@v1
         with:
           draft: true
-          tag_name: ${{ env.TAG_NAME }}
+          tag_name: ${{ env.TAG_NAME }}-src
           files: |
             ${{ env.ASSET_REL }}
             ${{ env.ZIP_RELEASE_SOURCE }}
@@ -172,8 +176,8 @@ jobs:
       - name: gradle build (v2)
         uses: gradle/gradle-build-action@v2
 
-      - name: gradle  Assemble github Release
-        run: ./gradlew assemblegithubRelease
+      - name: gradle  Assemble Release
+        run: ./gradlew assembleRelease
 
 # zip release begin
       - name: Create Archive All
@@ -210,26 +214,27 @@ jobs:
         with:
           name: upload-artifact
           path: |
-            ./app/build/outputs/apk/github/release/
+            ./app/build/outputs/apk/release/
 
       - name: Copy apk from outputs/
         shell: bash
         run: |
           set -x
           mkdir -p signed-apk
-          echo "LIST: " ./app/build/outputs/apk/github/release/
-          ls -l ./app/build/outputs/apk/github/release/
-          cp ./app/build/outputs/apk/github/release/* ./signed-apk/
+          echo "LIST: " ./app/build/outputs/apk/release/
+          ls -l ./app/build/outputs/apk/release/
+          cp ./app/build/outputs/apk/release/* ./signed-apk/
           echo "LIST: " ./signed-apk/
           ls -l ./signed-apk/
-          mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
+          mv ./signed-apk/app-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
+          # mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           ls -l ./signed-apk/
 
       - uses: deep-soft/sign-android-release@master
         name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
-        id: sign-FairEmail
+        id: sign-App
         with:
           releaseDirectory: ./signed-apk
           signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
@@ -245,7 +250,7 @@ jobs:
         uses: deep-soft/upload-artifact@v3
         with:
           name: ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
-          path: ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+          path: ${{steps.sign-App.outputs.signedReleaseFile}}
 
       - name: Publish signed apk package
         if: env.ANDROID_SIGNING_KEY != null
@@ -254,7 +259,7 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+            ${{steps.sign-App.outputs.signedReleaseFile}}
             _tag_name_.txt
 
       - name: Publish version build - signed apk package
@@ -264,7 +269,7 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}-${{ env.TAG_VERSION }}${{ env.TAG_BUILD }}
           files: |
-            ${{steps.sign-FairEmail.outputs.signedReleaseFile}}
+            ${{steps.sign-App.outputs.signedReleaseFile}}
             _tag_name_.txt
 
       - name: Publish unsigned apk package
@@ -274,5 +279,5 @@ jobs:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-unsigned.apk
+            ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
             _tag_name_.txt
