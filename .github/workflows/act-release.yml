@@ -1,4 +1,4 @@
-# 2023-12-02 12:40
+# 2024-06-26 15:30
 name: act-release
 
 on:
@@ -34,7 +34,10 @@ env:
   #  signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
   #  alias: ${{ secrets.ANDROID_ALIAS }}
   #  keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-  #  keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}  
+  #  keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+  # BUILD_TOOLS_VERSION: "34.0.0"
+  # BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
+  BUILD_TOOLS_VERSION: "34.0.0"
 
 jobs:
   validation:
@@ -231,7 +234,7 @@ jobs:
           echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           ls -l ./signed-apk/
 
-      - uses: deep-soft/sign-android-release@master
+      - uses: deep-soft/sign-android-release@v1
         name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
         id: sign-App
@@ -243,7 +246,8 @@ jobs:
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
         env:
           # override default build-tools version (29.0.3) -- optional
-          BUILD_TOOLS_VERSION: "30.0.2"
+          # BUILD_TOOLS_VERSION: "30.0.2"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload Artifacts
         if: env.ANDROID_SIGNING_KEY != null
