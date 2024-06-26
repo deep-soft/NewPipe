@@ -21,7 +21,7 @@
     <string name="grid">هێڵەکی</string>
     <string name="auto_queue_summary">به‌رده‌وامبوون له‌ (به‌بێ دووباره‌كردنه‌وه‌) نۆبه‌تی کارپێکەر به‌پێی په‌خشی هاوشێوه‌</string>
     <string name="enable_queue_limit">سنووردانانی نۆرەی دابەزاندن</string>
-    <string name="error_insufficient_storage">بیرگەی ناوەکیت پڕ بووە</string>
+    <string name="error_insufficient_storage_left">بیرگەی ناوەکیت پڕ بووە</string>
     <string name="subscribers_count_not_available">ژمارەی بەژداری نادیارە</string>
     <string name="overwrite_failed">ناتوانرێت لەسەر ئەو فایله‌وه‌ جێگیر بکرێت</string>
     <string name="tab_choose">په‌ڕه‌ هەڵبژێرە</string>
@@ -658,7 +658,7 @@
     <string name="error_report_notification_title">نیوپایپ تووشی کێشەیەک بوو ، کرتە بکە بۆ سکاڵاکردن</string>
     <string name="show_crash_the_player_title">پیشاندانی ”کڕاش کردنی لێدەرەکە“</string>
     <string name="create_error_notification">سازاندنی پەیامی کێشەیەک</string>
-    <string name="manual_update_title">پشکنین بۆ نوێکردنەوە</string>
+    <string name="check_for_updates">پشکنین بۆ نوێکردنەوە</string>
     <string name="error_report_channel_name">کێشە لە سکاڵا کردنی پەیام</string>
     <string name="error_report_channel_description">پەیامەکانی سکاڵاکردن لە کێشەکان</string>
     <string name="feed_new_items">بابەتە نوێیەکانی فیید</string>

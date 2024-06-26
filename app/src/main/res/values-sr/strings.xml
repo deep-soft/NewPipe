@@ -237,7 +237,7 @@
     <string name="error_download_resource_gone">Није могуће опоравити ово преузимање</string>
     <string name="error_timeout">Веза је истекла</string>
     <string name="error_progress_lost">Напредак је изгубљен, јер је фајл избрисан</string>
-    <string name="error_insufficient_storage">Недовољно меморије на уређају</string>
+    <string name="error_insufficient_storage_left">Недовољно меморије на уређају</string>
     <string name="error_postprocessing_stopped">NewPipe је затворен док је радио на фајлу</string>
     <string name="error_postprocessing_failed">Накнадна обрада није успела</string>
     <string name="error_http_not_found">Није пронађено</string>
@@ -715,7 +715,7 @@
     <string name="duplicate_in_playlist">Плејлисте које су затамњене већ садрже ову ставку.</string>
     <string name="leak_canary_not_available">LeakCanary није доступан</string>
     <string name="app_update_available_notification_text">Додирните да бисте преузели %s</string>
-    <string name="manual_update_title">Провери ажурирања</string>
+    <string name="check_for_updates">Провери ажурирања</string>
     <string name="seekbar_preview_thumbnail_title">Преглед сличице траке за претрагу</string>
     <string name="feed_hide_streams_title">Прикажи следеће стримове</string>
     <string name="feed_show_hide_streams">Прикажи/сакриј стримове</string>
@@ -827,4 +827,15 @@
     <string name="show_more">Прикажи више</string>
     <string name="show_less">Прикажи мање</string>
     <string name="notification_actions_summary_android13">Измените сваку радњу обавештења у наставку тако што ћете је додирнути. Прве три радње (пусти/паузирај, претходни и следећи) поставља систем и не могу се прилагодити.</string>
+    <string name="error_insufficient_storage">Нема довољно слободног меморијског простора на уређају</string>
+    <string name="settings_category_backup_restore_title">Прављење резервне копије и враћање</string>
+    <string name="reset_settings_title">Ресетуј подешавања</string>
+    <string name="reset_settings_summary">Ресетујте сва подешавања на подразумеване вредности</string>
+    <string name="reset_all_settings">Ресетовање свих подешавања ће одбацити сва жељена подешавања и поново покренути апликацију.
+\n
+\nЖелите ли заиста да наставите?</string>
+    <string name="no">Не</string>
+    <string name="yes">Да</string>
+    <string name="auto_update_check_description">NewPipe може аутоматски да проверава да ли постоје нове верзије с времена на време и да вас обавести када буду доступне.
+\nЖелите ли да омогућите ово?</string>
 </resources>

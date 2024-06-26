@@ -205,8 +205,8 @@
     <string name="popup_player">Pop-upspeler</string>
     <string name="preferred_player_fetcher_notification_title">Bezig met ophalen van informatie…</string>
     <string name="preferred_player_fetcher_notification_message">Bezig met laden van gevraagde inhoud</string>
-    <string name="import_data_title">Databank importeren</string>
-    <string name="export_data_title">Databank exporteren</string>
+    <string name="import_data_title">Data­base importeren</string>
+    <string name="export_data_title">Data­base exporteren</string>
     <string name="import_data_summary">Dit overschrijft je huidige geschiedenis, abonnementen, afspeellijsten en instellingen</string>
     <string name="export_data_summary">Exporteer geschiedenis, abonnementen, afspeellijsten en instellingen</string>
     <string name="export_complete_toast">Geëxporteerd</string>
@@ -396,7 +396,7 @@
     <string name="overwrite_unrelated_warning">Een bestand met dezelfde naam bestaat al</string>
     <string name="overwrite_failed">Kan bestand niet overschrijven</string>
     <string name="download_already_pending">Er is al een download met deze naam bezig</string>
-    <string name="error_insufficient_storage">Geen vrije ruimte meer op het apparaat</string>
+    <string name="error_insufficient_storage_left">Geen vrije ruimte meer op het apparaat</string>
     <string name="error_progress_lost">Voortgang verloren, omdat bestand was verwijderd</string>
     <string name="confirm_prompt">Wilt u de downloadgeschiedenis of alle gedownloade bestanden verwijderen\?</string>
     <string name="enable_queue_limit">Download­wachtrij limiteren</string>
@@ -637,7 +637,7 @@
     <string name="comments_are_disabled">Reacties zijn uitgeschakeld</string>
     <string name="remote_search_suggestions">Zoeksuggesties op afstand</string>
     <string name="local_search_suggestions">Lokale zoeksuggesties</string>
-    <string name="mark_as_watched">Markeer als bekeken</string>
+    <string name="mark_as_watched">Markeren als bekeken</string>
     <plurals name="deleted_downloads_toast">
         <item quantity="one">%1$s download verwijderd</item>
         <item quantity="other">%1$s downloads verwijderd</item>
@@ -656,7 +656,7 @@
     <string name="show_crash_the_player_title">‘Speler crashen’ tonen</string>
     <string name="show_crash_the_player_summary">Toont een crash-optie bij gebruik van de speler</string>
     <string name="manual_update_description">Controleer handmatig op nieuwe versies</string>
-    <string name="manual_update_title">Controleren op updates</string>
+    <string name="check_for_updates">Controleren op updates</string>
     <string name="checking_updates_toast">Bezig met controleren op updates…</string>
     <string name="feed_new_items">Nieuwe feeditems</string>
     <string name="error_report_channel_name">Foutrapporten</string>
@@ -813,4 +813,15 @@
     <string name="show_more">Meer tonen</string>
     <string name="show_less">Minder tonen</string>
     <string name="notification_actions_summary_android13">Bewerk elke meldings­actie hieronder door erop te tikken. De eerste drie acties (afspelen/pauzeren, vorige en volgende) zijn ingesteld door het systeem en kunnen niet worden aangepast.</string>
+    <string name="error_insufficient_storage">Onvoldoende vrĳe ruimte op het apparaat</string>
+    <string name="yes">Ja</string>
+    <string name="reset_settings_summary">Herstelt alle instellingen naar hun standaard­waarde</string>
+    <string name="reset_all_settings">Als u alle instellingen reset worden al uw voorkeurs­instellingen verwijderd en wordt de app opnieuw gestart.
+\n
+\nWeet u zeker dat u verder wilt gaan?</string>
+    <string name="no">Nee</string>
+    <string name="settings_category_backup_restore_title">Back-up en herstel</string>
+    <string name="auto_update_check_description">NewPipe kan van tĳd tot tĳd auto­matisch controleren op nieuwe versies en u op de hoogte stellen zodra deze beschik­baar zijn.
+\nWilt u dit inschakelen?</string>
+    <string name="reset_settings_title">Instellingen resetten</string>
 </resources>

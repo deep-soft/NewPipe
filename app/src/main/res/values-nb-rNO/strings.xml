@@ -395,7 +395,7 @@
     <string name="overwrite_failed">Kan ikke overskrive filen</string>
     <string name="download_already_pending">Det finnes en ventende nedlasting ved dette navnet</string>
     <string name="error_postprocessing_stopped">NewPipe ble lukket under arbeid med filen</string>
-    <string name="error_insufficient_storage">Ingen ledig plass på enheten</string>
+    <string name="error_insufficient_storage_left">Ingen ledig plass på enheten</string>
     <string name="error_progress_lost">Framdrift gikk tapt, fordi filen ble slettet</string>
     <string name="error_timeout">Tilkoblingsavbrudd</string>
     <string name="confirm_prompt">Ønsker du å slette din nedlastingshistorikk eller slette alle nedlastede filer\?</string>
@@ -651,7 +651,7 @@
     <string name="start_main_player_fullscreen_title">Start hovedspiller i fullskjerm</string>
     <string name="enqueue_next_stream">Still i kø neste</string>
     <string name="enqueued_next">I kø neste</string>
-    <string name="manual_update_title">Se etter oppdateringer</string>
+    <string name="check_for_updates">Se etter oppdateringer</string>
     <string name="processing_may_take_a_moment">Behandler … Kan ta sin tid</string>
     <string name="crash_the_player">Krasj avspilleren</string>
     <string name="show_crash_the_player_title">Vis \"Krasj spilleren\"</string>

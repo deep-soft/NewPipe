@@ -376,7 +376,7 @@
     <string name="error_http_not_found">No encontrado</string>
     <string name="error_postprocessing_failed">Falló el posprocesamiento</string>
     <string name="error_postprocessing_stopped">NewPipe se cerró mientras se trabajaba en el archivo</string>
-    <string name="error_insufficient_storage">No hay suficiente espacio disponible en el dispositivo</string>
+    <string name="error_insufficient_storage_left">No hay suficiente espacio disponible en el dispositivo</string>
     <string name="error_progress_lost">Progreso perdido, porque el archivo fue borrado</string>
     <string name="error_timeout">El tiempo de conexión expiro</string>
     <string name="error_download_resource_gone">No se puede recuperar esta descarga</string>
@@ -667,7 +667,7 @@
     <string name="enqueued_next">Añadido el siguiente vídeo a la cola</string>
     <string name="enqueue_next_stream">Añadir el siguiente vídeo a la cola</string>
     <string name="processing_may_take_a_moment">Procesando… Podría tomar un momento</string>
-    <string name="manual_update_title">Buscar actualizaciones</string>
+    <string name="check_for_updates">Buscar actualizaciones</string>
     <string name="manual_update_description">Buscar nuevas versiones manualmente</string>
     <string name="checking_updates_toast">Buscando actualizaciones…</string>
     <string name="feed_new_items">Nuevos elementos en el muro</string>
@@ -782,7 +782,7 @@
     <string name="metadata_subscribers">Suscriptores</string>
     <string name="show_channel_tabs_summary">Qué pestañas se muestran en las páginas de los canales</string>
     <string name="show_channel_tabs">Pestañas del canal</string>
-    <string name="channel_tab_shorts">Cortos</string>
+    <string name="channel_tab_shorts">Shorts</string>
     <string name="loading_metadata_title">Cargando los metadatos…</string>
     <string name="feed_fetch_channel_tabs">Recuperar las fichas del canal</string>
     <string name="channel_tab_about">Acerca de</string>
@@ -830,4 +830,15 @@
     <string name="show_more">Ver más</string>
     <string name="show_less">Mostrar menos</string>
     <string name="notification_actions_summary_android13">Edite cada acción de notificación pulsando sobre ella. Las tres primeras acciones (reproducir/pausa, anterior y siguiente) las establece el sistema y no se pueden personalizar.</string>
+    <string name="error_insufficient_storage">No hay suficiente espacio libre en el dispositivo</string>
+    <string name="settings_category_backup_restore_title">Copia de seguridad y restaurar</string>
+    <string name="reset_settings_title">Reiniciar ajustes</string>
+    <string name="reset_settings_summary">Restablecer todos los ajustes a sus valores predeterminados</string>
+    <string name="reset_all_settings">Restablecer todos los ajustes descartará todos sus ajustes preferidos y reiniciará la aplicación.
+\n
+\n¿Estas seguro que deseas continuar?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="auto_update_check_description">NewPipe puede buscar automáticamente nuevas versiones de vez en cuando y notificarle cuando estén disponibles.
+\n¿Quieres habilitar esto?</string>
 </resources>

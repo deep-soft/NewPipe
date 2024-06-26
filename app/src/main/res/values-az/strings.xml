@@ -448,7 +448,7 @@
         <item quantity="one">%s video</item>
         <item quantity="other">%s video</item>
     </plurals>
-    <string name="manual_update_title">Yeniləmələri yoxla</string>
+    <string name="check_for_updates">Yeniləmələri yoxla</string>
     <string name="seekbar_preview_thumbnail_title">Axtarış çubuğunun miniatür önizləməsi</string>
     <string name="permission_denied">Əməliyyat sistem tərəfindən ləğv edildi</string>
     <string name="auto">Avto</string>
@@ -548,7 +548,7 @@
     <string name="remove_watched">İzləniləni sil</string>
     <string name="downloads_storage_use_saf_title">Sistem qovluğu seçicisini (SAF) istifadə et</string>
     <string name="error_timeout">Bağlantı fasiləsi</string>
-    <string name="error_insufficient_storage">Cihazda yer qalmayıb</string>
+    <string name="error_insufficient_storage_left">Cihazda yer qalmayıb</string>
     <string name="error_postprocessing_stopped">Fayl üzərində işləyərkən NewPipe bağlandı</string>
     <string name="error_postprocessing_failed">Emaldan sonra uğursuz oldu</string>
     <string name="error_connect_host">Serverə qoşulmaq mümkün deyil</string>

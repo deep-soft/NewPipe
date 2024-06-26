@@ -399,7 +399,7 @@
     <string name="overwrite_failed">немагчыма перазапісаць файл</string>
     <string name="download_already_pending">Ў чарзе ўжо ёсць загрузка з такім імем</string>
     <string name="error_postprocessing_stopped">NewPipe была зачынена падчас працы над файлам</string>
-    <string name="error_insufficient_storage">Скончылася вольнае месца на прыладзе</string>
+    <string name="error_insufficient_storage_left">Скончылася вольнае месца на прыладзе</string>
     <string name="error_progress_lost">Прагрэс страчаны, так як файл быў выдалены</string>
     <string name="error_timeout">Час злучэння выйшла</string>
     <string name="confirm_prompt">Вы ўпэўнены\?</string>
@@ -670,7 +670,7 @@
     <string name="enable_streams_notifications_summary">Апавяшчаць аб новых стрымах з падпісак</string>
     <string name="streams_notifications_interval_title">Частата праверкі</string>
     <string name="streams_notifications_network_title">Патрабуецца падключэнне да сеткі</string>
-    <string name="manual_update_title">Праверце наяўнасць абнаўленняў</string>
+    <string name="check_for_updates">Праверце наяўнасць абнаўленняў</string>
     <string name="manual_update_description">Праверце новыя версіі ўручную</string>
     <string name="autoplay_summary">Аўтаматычны запуск прайгравання — %s</string>
     <string name="card">Картка</string>
@@ -839,4 +839,5 @@
     <string name="show_more">Паказаць больш</string>
     <string name="show_less">Паказаць менш</string>
     <string name="notification_actions_summary_android13">Адрэдагуйце кожнае дзеянне апавяшчэння, націснуўшы на яго. Першыя тры дзеянні (прайграванне/паўза, папярэдняе і наступнае) задаюцца сістэмай і не могуць быць зменены.</string>
+    <string name="error_insufficient_storage">Недастаткова вольнага месца на прыладзе</string>
 </resources>
