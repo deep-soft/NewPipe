@@ -1,8 +1,5 @@
 name: "PR size labeler"
-# on: [pull_request]
-on:
-  workflow_dispatch:
-
+on: [pull_request_target]
 permissions:
   contents: read
   pull-requests: write
