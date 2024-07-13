@@ -1,4 +1,4 @@
-# 2023-12-02 12:40
+# 2024-07-13 12:40
 name: act-release
 
 on:
@@ -34,14 +34,17 @@ env:
   #  signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
   #  alias: ${{ secrets.ANDROID_ALIAS }}
   #  keyStorePassword: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
-  #  keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}  
+  #  keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
+  # BUILD_TOOLS_VERSION: "34.0.0"
+  # BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
+  BUILD_TOOLS_VERSION: "34.0.0"
 
 jobs:
   validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/checkout@v4
+      - uses: gradle/wrapper-validation-action@v2
 
   build:
     runs-on: ubuntu-latest
@@ -137,7 +140,7 @@ jobs:
 # zip source begin
       - name: Create Archive source
 #        if: inputs.create-archive-all == true
-        uses: deep-soft/zip-release@v2
+        uses: deep-soft/zip-release@v3
         with:
           type: 'zip'
           filename: '${{ env.TAG_NAME }}-${{ env.TAG_VERSION }}-src.zip'
@@ -157,7 +160,7 @@ jobs:
       - name: Publish source
 #        if: inputs.create-archive-all == true
         continue-on-error: true
-        uses: deep-soft/action-gh-release@v1
+        uses: deep-soft/action-gh-release@v2.1
         with:
           draft: true
           tag_name: ${{ env.TAG_NAME }}-src
@@ -182,7 +185,7 @@ jobs:
 # zip release begin
       - name: Create Archive All
         if: inputs.create-archive-all == true
-        uses: deep-soft/zip-release@v2
+        uses: deep-soft/zip-release@v3
         with:
           type: 'zip'
           filename: '${{ env.TAG_NAME }}-${{ env.TAG_VERSION }}-all.zip'
@@ -200,7 +203,7 @@ jobs:
       - name: Publish Release
         if: inputs.create-archive-all == true
         continue-on-error: true
-        uses: deep-soft/action-gh-release@v1
+        uses: deep-soft/action-gh-release@v2.1
         with:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
@@ -231,7 +234,7 @@ jobs:
           echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
           ls -l ./signed-apk/
 
-      - uses: deep-soft/sign-android-release@master
+      - uses: deep-soft/sign-android-release@v1
         name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
         id: sign-App
@@ -243,7 +246,8 @@ jobs:
           keyPassword: ${{ secrets.ANDROID_KEY_PASSWORD }}
         env:
           # override default build-tools version (29.0.3) -- optional
-          BUILD_TOOLS_VERSION: "34.0.0"
+          # BUILD_TOOLS_VERSION: "30.0.2"
+          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload Artifacts
         if: env.ANDROID_SIGNING_KEY != null
@@ -254,7 +258,7 @@ jobs:
 
       - name: Publish signed apk package
         if: env.ANDROID_SIGNING_KEY != null
-        uses: deep-soft/action-gh-release@v1
+        uses: deep-soft/action-gh-release@v2.1
         with:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
@@ -264,7 +268,7 @@ jobs:
 
       - name: Publish version build - signed apk package
         if: env.ANDROID_SIGNING_KEY != null
-        uses: deep-soft/action-gh-release@v1
+        uses: deep-soft/action-gh-release@v2.1
         with:
           draft: true
           tag_name: ${{ env.TAG_NAME }}-${{ env.TAG_VERSION }}${{ env.TAG_BUILD }}
@@ -274,7 +278,7 @@ jobs:
 
       - name: Publish unsigned apk package
         if: env.ANDROID_SIGNING_KEY == null
-        uses: deep-soft/action-gh-release@v1
+        uses: deep-soft/action-gh-release@v2.1
         with:
           draft: true
           tag_name: ${{ env.TAG_NAME }}
