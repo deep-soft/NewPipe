@@ -4,11 +4,11 @@ name: No Response
 # to work properly.
 on:
   workflow_dispatch:
-#  issue_comment:
-#    types: [created]
-#  schedule:
-#    # Run daily at midnight.
-#    - cron: '0 0 * * *'
+  issue_comment:
+    types: [created]
+  schedule:
+    # Run daily at midnight.
+    - cron: '0 0 * * *'
 
 permissions:
   issues: write
