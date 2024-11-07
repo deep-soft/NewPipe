@@ -86,10 +86,11 @@ jobs:
         run: |
           #set -x;
           # NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b
+          # sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
           echo "NewPipeExtractor ... ";
           echo grep 1;
           grep_1=$(grep "NewPipeExtractor:" app/build.gradle);
-          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
+          sed -ibak "s!com.github.TeamNewPipe:NewPipeExtractor:v0.24.2!com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.24.2!" app/build.gradle;
           grep_2=$(grep "NewPipeExtractor:" app/build.gradle);
           echo "grep1:[$grep_1]";
           echo "grep2:[$grep_2]";
