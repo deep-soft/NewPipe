@@ -43,7 +43,7 @@ jobs:
   validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: deep-soft/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
 
   build:
@@ -171,17 +171,18 @@ jobs:
 # zip source end
 
       - name: Setup java (v3)
-        uses: actions/setup-java@v3
+        uses: deep-soft/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: gradle
 
       - name: gradle build (v2)
-        uses: gradle/gradle-build-action@v2
+        uses: deep-soft/gradle-build-action@v3
 
       - name: gradle  Assemble Release
-        run: ./gradlew assembleRelease
+        run: |
+          ./gradlew assembleRelease
 
 # zip release begin
       - name: Create Archive All
@@ -214,7 +215,7 @@ jobs:
 # zip release end
 
       - name: Upload Artifact
-        uses: deep-soft/upload-artifact@v3
+        uses: deep-soft/upload-artifact@v4
         with:
           name: upload-artifact
           path: |
@@ -235,9 +236,9 @@ jobs:
           echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk;
           ls -l ./signed-apk/;
 
-      - uses: deep-soft/sign-android-release@v1
-        name: Sign app APK
+      - name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
+        uses: deep-soft/sign-android-release@v1
         id: sign-App
         with:
           releaseDirectory: ./signed-apk
