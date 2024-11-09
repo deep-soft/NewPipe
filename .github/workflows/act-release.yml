@@ -1,4 +1,4 @@
-# 2024-07-13 12:40
+# 2024-11-09 11:30
 name: act-release
 
 on:
@@ -43,7 +43,7 @@ jobs:
   validation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: deep-soft/checkout@v4
       - uses: gradle/wrapper-validation-action@v2
 
   build:
@@ -86,10 +86,11 @@ jobs:
         run: |
           #set -x;
           # NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b
+          # sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
           echo "NewPipeExtractor ... ";
           echo grep 1;
           grep_1=$(grep "NewPipeExtractor:" app/build.gradle);
-          sed -ibak "s!NewPipeExtractor:289db1178ab66694c23893e6a487d4708343c47b!NewPipeExtractor:289db117!" app/build.gradle;
+          sed -ibak "s!com.github.TeamNewPipe:NewPipeExtractor:v0.24.2!com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.24.2!" app/build.gradle;
           grep_2=$(grep "NewPipeExtractor:" app/build.gradle);
           echo "grep1:[$grep_1]";
           echo "grep2:[$grep_2]";
@@ -170,17 +171,18 @@ jobs:
 # zip source end
 
       - name: Setup java (v3)
-        uses: actions/setup-java@v3
+        uses: deep-soft/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: gradle
 
       - name: gradle build (v2)
-        uses: gradle/gradle-build-action@v2
+        uses: deep-soft/gradle-build-action@v3
 
       - name: gradle  Assemble Release
-        run: ./gradlew assembleRelease
+        run: |
+          ./gradlew assembleRelease
 
 # zip release begin
       - name: Create Archive All
@@ -213,7 +215,7 @@ jobs:
 # zip release end
 
       - name: Upload Artifact
-        uses: deep-soft/upload-artifact@v3
+        uses: deep-soft/upload-artifact@v4
         with:
           name: upload-artifact
           path: |
@@ -222,21 +224,21 @@ jobs:
       - name: Copy apk from outputs/
         shell: bash
         run: |
-          set -x
-          mkdir -p signed-apk
-          echo "LIST: " ./app/build/outputs/apk/release/
-          ls -l ./app/build/outputs/apk/release/
-          cp ./app/build/outputs/apk/release/* ./signed-apk/
-          echo "LIST: " ./signed-apk/
-          ls -l ./signed-apk/
-          mv ./signed-apk/app-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
-          # mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
-          echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
-          ls -l ./signed-apk/
+          set -x;
+          mkdir -p signed-apk;
+          echo "LIST: " ./app/build/outputs/apk/release/;
+          ls -l ./app/build/outputs/apk/release/;
+          cp ./app/build/outputs/apk/release/* ./signed-apk/ || true;
+          echo "LIST: " ./signed-apk/;
+          ls -l ./signed-apk/;
+          mv ./signed-apk/app-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk;
+          # mv ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}*-release-unsigned.apk ./signed-apk/${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk;
+          echo "LIST: " ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk;
+          ls -l ./signed-apk/;
 
-      - uses: deep-soft/sign-android-release@v1
-        name: Sign app APK
+      - name: Sign app APK
         if: env.ANDROID_SIGNING_KEY != null
+        uses: deep-soft/sign-android-release@v1
         id: sign-App
         with:
           releaseDirectory: ./signed-apk
