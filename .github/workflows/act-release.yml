@@ -215,6 +215,7 @@ jobs:
 # zip release end
 
       - name: Upload Artifact
+        continue-on-error: true
         uses: deep-soft/upload-artifact@v4
         with:
           name: upload-artifact
@@ -252,10 +253,11 @@ jobs:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOLS_VERSION }}
 
       - name: Upload Artifacts
+        continue-on-error: true
         if: env.ANDROID_SIGNING_KEY != null
-        uses: deep-soft/upload-artifact@v3
+        uses: deep-soft/upload-artifact@v4
         with:
-          name: ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release.apk
+          name: ${{ env.PRG_NAME }}-${{ env.PRG_VERSION }}-release
           path: ${{steps.sign-App.outputs.signedReleaseFile}}
 
       - name: Publish signed apk package
